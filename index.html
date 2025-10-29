@@ -3,40 +3,39 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Slayervoxy | Uzantılar ve Kodlar</title>
-    <meta name="description" content="Slayervoxy tarafından geliştirilen uzantılar ve modern kodlar" />
+    <title>Voxy | Uzantılar ve Kodlar</title>
+    <meta name="description" content="Voxy tarafından geliştirilen uzantılar ve modern kodlar" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css" />
     <script src="js/app.js" defer></script>
 
-    <!-- Google Sign-In -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- Site Scripts -->
     <script>
       window.onload = function () {
-        const btn = document.getElementById('googleSignIn');
-        if (!btn) return;
-        google.accounts.id.initialize({
-          client_id: 'YOUR_GOOGLE_CLIENT_ID',
-          callback: handleCredentialResponse,
-        });
-        google.accounts.id.renderButton(btn, { theme: 'filled_blue', size: 'medium', type: 'standard', shape: 'pill' });
+        // Site başlangıç kodları
       };
     </script>
   </head>
   <body>
+    <div class="animated-bg"></div>
     <header class="site-header">
       <div class="wrap">
         <div class="brand">
-          <div class="logo">S</div>
+          <img src="images/voxy-logo.svg" alt="Voxy" class="logo-svg" />
           <div class="titles">
-            <h1 class="title">Slayervoxy</h1>
+            <h1 class="title">Voxy</h1>
             <div class="subtitle">Uzantılar • Kodlar • Modern yayınlar</div>
           </div>
         </div>
+        <nav class="site-nav">
+          <a href="#extensions" class="nav-link primary">Uzantılar</a>
+          <a href="#about" class="nav-link ghost">Hakkımda</a>
+          <a href="https://github.com/FOXYorj" target="_blank" rel="noopener" class="nav-link ghost">GitHub</a>
+          <a href="#" id="settingsBtn" class="nav-link ghost">Ayarlar</a>
+        </nav>
         <div class="auth">
-          <div id="googleSignIn" class="btn ghost"></div>
           <div id="userChip" class="user-chip" title="Profili düzenle">
             <img alt="avatar" hidden />
             <span>erayy0143</span>
@@ -53,17 +52,17 @@
             <p>Modern, renkli ve hızlı. Kodlar açık; uzantılar kolayca indirilebilir. Google ile giriş yaparak profilini yönetebilirsin.</p>
             <div class="hero-actions">
               <a href="#extensions" class="btn primary">Uzantıları Gör</a>
-              <a href="https://github.com/erayy0143" target="_blank" rel="noopener" class="btn secondary">GitHub Profilim</a>
+              <a href="https://github.com/FOXYorj" target="_blank" rel="noopener" class="btn secondary">GitHub Profilim</a>
               <a href="#about" class="btn ghost">Hakkımda</a>
             </div>
             <div class="ticker" aria-label="duyuru">
               <div class="ticker-track">
                 <div class="ticker-item">Uzantılar ve kodlar hakkında ipuçları • performans • güvenlik • stil</div>
                 <div class="ticker-item">ZIP ile indirin, GitHub üzerinden kaynak kodları inceleyin</div>
-                <div class="ticker-item">Google ile giriş yapın, profilinizi kişiselleştirin</div>
+                <div class="ticker-item">Ayarlar ile site görünümünü özelleştirin</div>
                 <div class="ticker-item">Uzantılar ve kodlar hakkında ipuçları • performans • güvenlik • stil</div>
                 <div class="ticker-item">ZIP ile indirin, GitHub üzerinden kaynak kodları inceleyin</div>
-                <div class="ticker-item">Google ile giriş yapın, profilinizi kişiselleştirin</div>
+                <div class="ticker-item">Ayarlar ile site görünümünü özelleştirin</div>
               </div>
             </div>
           </div>
@@ -74,35 +73,14 @@
         <div class="wrap">
           <h2 class="section-title">Uzantılarım</h2>
           <div class="cards">
-            <article class="card accent-blue">
+            <article class="card accent-blue" style="grid-column: span 2; text-align: center;">
               <div class="card-head">
-                <h3>YT Favorites</h3>
-                <span class="badge">YouTube</span>
+                <h3>Çok Yakında</h3>
+                <span class="badge">Yeni Uzantılar</span>
               </div>
-              <p>Favori YouTube videolarınızı hızlıca etiketleyin, yönetin ve paylaşın.</p>
+              <p>Yeni uzantılar üzerinde çalışıyorum. Yakında burada olacaklar!</p>
               <div class="tags">
-                <span>favorites</span><span>bookmarking</span><span>productivity</span>
-              </div>
-              <div class="card-actions">
-                <a class="btn primary" href="https://github.com/erayy0143/yt-favorites" target="_blank" rel="noopener">GitHub</a>
-                <a class="btn" href="https://github.com/erayy0143/yt-favorites/archive/refs/heads/main.zip">İndir</a>
-                <a class="btn ghost" href="pages/yt-favorites.html">Detaylar</a>
-              </div>
-            </article>
-
-            <article class="card accent-pink">
-              <div class="card-head">
-                <h3>YT Beautify</h3>
-                <span class="badge">YouTube</span>
-              </div>
-              <p>YouTube arayüzünü güzelleştirir, renkleri ve düzeni modernize eder.</p>
-              <div class="tags">
-                <span>design</span><span>theme</span><span>ux</span>
-              </div>
-              <div class="card-actions">
-                <a class="btn primary" href="https://github.com/erayy0143/yt-beautify" target="_blank" rel="noopener">GitHub</a>
-                <a class="btn" href="https://github.com/erayy0143/yt-beautify/archive/refs/heads/main.zip">İndir</a>
-                <a class="btn ghost" href="pages/yt-beautify.html">Detaylar</a>
+                <span>coming-soon</span><span>new-features</span><span>stay-tuned</span>
               </div>
             </article>
           </div>
@@ -139,6 +117,34 @@
         <div class="modal-actions">
           <button class="btn ghost" id="closeProfile">Kapat</button>
           <button class="btn primary" id="saveProfile">Kaydet</button>
+        </div>
+      </div>
+    </dialog>
+    
+    <!-- Ayarlar Modalı -->
+    <dialog id="settingsModal" class="modal">
+      <div class="modal-backdrop" id="closeSettings"></div>
+      <div class="modal-card">
+        <h3>Site Ayarları</h3>
+        <div class="settings-group">
+          <label for="siteSize">Site Boyutu</label>
+          <select id="siteSize">
+            <option value="normal">Normal</option>
+            <option value="large">Büyük</option>
+            <option value="larger">Daha Büyük</option>
+          </select>
+        </div>
+        <div class="settings-group">
+          <label for="themeSelect">Tema</label>
+          <select id="themeSelect">
+            <option value="light">Açık</option>
+            <option value="dark">Koyu</option>
+            <option value="auto">Otomatik</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button class="btn ghost" id="closeSettings">Kapat</button>
+          <button class="btn primary" id="saveSettings">Kaydet</button>
         </div>
       </div>
     </dialog>

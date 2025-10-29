@@ -11,6 +11,16 @@
   --accent-blue: #61dafb;
   --accent-green: #2ee59d;
   --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --base-font-size: 16px;
+}
+
+/* Site Boyutu Ayarları */
+[data-size="large"] {
+  --base-font-size: 18px;
+}
+
+[data-size="larger"] {
+  --base-font-size: 20px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -26,6 +36,9 @@
 
 * { box-sizing: border-box; }
 html, body { height: 100%; }
+html {
+  font-size: var(--base-font-size);
+}
 body {
   margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   background:
@@ -34,15 +47,25 @@ body {
     var(--bg);
   color: var(--text);
 }
+.animated-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+.animated-bg::before { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(111,114,255,0.15), rgba(160,107,255,0.15), rgba(97,218,251,0.12)); background-size: 200% 200%; animation: gradientShift 24s ease-in-out infinite; }
+@keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
 /* Header */
-.site-header { position: sticky; top: 0; z-index: 20; backdrop-filter: saturate(180%) blur(8px); background: rgba(12,15,20,0.6); border-bottom: 1px solid var(--border); }
+.site-header { position: sticky; top: 0; z-index: 20; backdrop-filter: saturate(180%) blur(10px); background: rgba(12,15,20,0.45); border-bottom: 1px solid var(--border); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
 .brand { display: flex; align-items: center; gap: 12px; }
 .logo { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, var(--primary), var(--primary-2)); box-shadow: var(--shadow); font-size: 20px; }
+.logo-svg { width: 44px; height: 44px; border-radius: 12px; box-shadow: var(--shadow); filter: drop-shadow(0 2px 8px rgba(160,107,255,0.35)); }
 .titles .title { font-family: Poppins, Inter, sans-serif; font-weight: 700; margin: 0; }
 .titles .subtitle { color: var(--muted); font-size: 14px; }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; }
+.site-nav { display: flex; align-items: center; gap: 8px; }
+.site-nav .nav-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--border); color: var(--text); text-decoration: none; transition: transform .14s ease, background .14s ease, border-color .14s ease, box-shadow .14s ease; }
+.site-nav .nav-link:hover { transform: translateY(-1px); border-color: rgba(160,107,255,0.45); box-shadow: 0 6px 18px rgba(160,107,255,0.18); }
+.site-nav .nav-link.active { outline: 2px solid rgba(160,107,255,0.35); }
+.site-nav .nav-link.primary { background: linear-gradient(135deg, var(--primary), var(--primary-2)); border-color: transparent; }
+.site-nav .nav-link.ghost { background: transparent; }
 .auth { display: flex; align-items: center; gap: 10px; }
 .user-chip { display: inline-flex; align-items: center; gap: 10px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 999px; background: var(--card); cursor: pointer; }
 .user-chip img { width: 22px; height: 22px; border-radius: 50%; }
@@ -50,7 +73,9 @@ body {
 
 /* Buttons */
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--border); color: var(--text); text-decoration: none; cursor: pointer; transition: transform .12s ease, background .12s ease, border-color .12s ease; }
-.btn:hover { transform: translateY(-1px); }
+.btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,0.22); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.secondary:hover { filter: brightness(1.06); }
 .btn.primary { background: linear-gradient(135deg, var(--primary), var(--primary-2)); border-color: transparent; }
 .btn.secondary { background: linear-gradient(135deg, var(--accent-green), #58d5b6); border-color: transparent; }
 .btn.ghost { background: transparent; }
@@ -74,7 +99,8 @@ body {
 .section-title { font-family: Poppins, Inter, sans-serif; margin: 0 0 10px; }
 .grid { padding: 30px 0 60px; }
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
-.card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 18px; box-shadow: var(--shadow); }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 18px; box-shadow: var(--shadow); transition: transform .16s ease, box-shadow .16s ease, outline-color .16s ease; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 16px 38px rgba(0,0,0,0.35); }
 .card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
 .card h3 { font-family: Poppins, Inter, sans-serif; margin: 0; font-size: 20px; }
 .badge { font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); }
@@ -82,8 +108,10 @@ body {
 .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .tags span { font-size: 12px; color: var(--muted); border: 1px dashed var(--border); border-radius: 999px; padding: 4px 10px; }
 .card-actions { display: flex; gap: 8px; }
-.accent-pink { outline: 2px solid rgba(255,110,199,0.25); }
-.accent-blue { outline: 2px solid rgba(97,218,251,0.25); }
+.accent-pink { outline: 2px solid rgba(255,110,199,0.28); }
+.accent-blue { outline: 2px solid rgba(97,218,251,0.28); }
+.card.accent-pink:hover { outline-color: rgba(255,110,199,0.45); }
+.card.accent-blue:hover { outline-color: rgba(97,218,251,0.45); }
 
 /* About */
 .about { padding: 24px 0; border-top: 1px dashed var(--border); }
@@ -110,8 +138,29 @@ body {
 .modal-card input { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: transparent; color: var(--text); }
 .modal-actions { display: flex; gap: 8px; margin-top: 12px; }
 
+/* Ayarlar Modalı Stilleri */
+.settings-group {
+  margin-bottom: 1rem;
+}
+
+.settings-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.settings-group select {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background-color: transparent;
+  color: var(--text);
+}
+
 /* Responsive */
 @media (max-width: 640px) {
   .site-header .wrap { padding: 10px 14px; }
   .hero-content { padding: 16px; }
+  .site-nav { display: none; }
 }

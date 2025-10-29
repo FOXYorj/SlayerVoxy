@@ -34,3 +34,5 @@ python -m http.server 5512
 - ZIP indirme linkleri GitHub reposu ZIP’lerine ayarlanmıştır:
   - `https://github.com/erayy0143/yt-favorites/archive/refs/heads/main.zip`
   - `https://github.com/erayy0143/yt-beautify/archive/refs/heads/main.zip`
+
+  Altın Paslanmaz...

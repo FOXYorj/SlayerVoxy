@@ -7,7 +7,7 @@ function showToast(msg) {
   setTimeout(() => toastEl.classList.remove('show'), 2400);
 }
 
-// Kullanıcı oturumu (Local + Google)
+// Kullanıcı oturumu (Local)
 const defaultUser = { name: 'erayy0143', picture: '', isGoogle: false };
 const user = { ...defaultUser };
 
@@ -47,19 +47,71 @@ function parseJwt(token) {
   }
 }
 
-// Google callback
-window.handleCredentialResponse = (response) => {
-  const data = parseJwt(response.credential || '');
-  if (!data) {
-    showToast('Google oturum açılamadı');
-    return;
+// Site ayarları
+document.addEventListener('DOMContentLoaded', function() {
+  // Ayarlar butonunu aktifleştir
+  const settingsBtn = document.getElementById('settingsBtn');
+  const settingsModal = document.getElementById('settingsModal');
+  const closeSettings = document.querySelectorAll('#closeSettings');
+  const saveSettings = document.getElementById('saveSettings');
+  const siteSize = document.getElementById('siteSize');
+  const themeSelect = document.getElementById('themeSelect');
+  
+  // Ayarlar butonuna tıklandığında
+  if (settingsBtn) {
+    settingsBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      settingsModal.showModal();
+    });
   }
-  user.name = data.name || user.name;
-  user.picture = data.picture || '';
-  user.isGoogle = true;
-  updateUserChip();
-  showToast(`Hoş geldin, ${user.name}`);
-};
+  
+  // Ayarlar modalını kapatma
+  if (closeSettings) {
+    closeSettings.forEach(btn => {
+      btn.addEventListener('click', function() {
+        settingsModal.close();
+      });
+    });
+  }
+  
+  // Ayarları kaydetme
+  if (saveSettings) {
+    saveSettings.addEventListener('click', function() {
+      // Site boyutunu ayarla
+      const selectedSize = siteSize.value;
+      document.documentElement.setAttribute('data-size', selectedSize);
+      
+      // Temayı ayarla
+      const selectedTheme = themeSelect.value;
+      document.documentElement.setAttribute('data-theme', selectedTheme);
+      
+      // Ayarları localStorage'a kaydet
+      localStorage.setItem('siteSize', selectedSize);
+      localStorage.setItem('siteTheme', selectedTheme);
+      
+      // Modalı kapat
+      settingsModal.close();
+      
+      // Bildirim göster
+      showToast('Ayarlar kaydedildi!');
+    });
+  }
+  
+  // Sayfa yüklendiğinde kaydedilmiş ayarları uygula
+  const savedSize = localStorage.getItem('siteSize');
+  const savedTheme = localStorage.getItem('siteTheme');
+  
+  if (savedSize) {
+    document.documentElement.setAttribute('data-size', savedSize);
+    if (siteSize) siteSize.value = savedSize;
+  }
+  
+  if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    if (themeSelect) themeSelect.value = savedTheme;
+  }
+});
+// Google giriş kaldırıldı
 
 // Profil modalı
 const profileModal = document.getElementById('profileModal');
